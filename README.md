@@ -84,7 +84,7 @@ Entering 'p' will list all 263 galaxies. You can use the console's scroll bars t
 ![Galaxy List](Images/03.png)
 ![Galaxy List continued](Images/04.png)
 
-Enter the desired galaxy ID (such as 10 for Eissentam), and a note (if desired). you can specify a line break for a note by placing a '\n' in the text where you want the line break. The notes area is big enough for two lines (a single line break (\n)):
+Enter the desired galaxy ID (such as 10 for Eissentam), and a note (if desired). you can specify a line break for a note by placing a '\\n' in the text where you want the line break. The notes area is big enough for two lines (a single line break (\\n)):
 
 ![Enter galaxy Id and notes](Images/05.png)
 
