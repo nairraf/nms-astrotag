@@ -1,7 +1,7 @@
 # AstroTag - the No Man's Sky Screenshot Annotator
 
 Welcome to Quol's No Man's Sky screenshot annotater - AstroTag. 
-The purpose of this tool is to annotate screenshots by overlaying information like galaxy name, player name, and notes to the screenshot to help catalog findings. It is recommended that you use Steam's F12 when capturing screenshots as this will capture the portal address, and then the astrotag overlays the other details. AstroTag will not touch the original screenshots, as all edits are performed on copies of the screenshots.
+The purpose of this tool is to annotate screenshots by overlaying information like galaxy name, player name, and notes to the screenshot to help catalog findings. It is recommended that you use Steam's F12 when capturing screenshots as this will capture the portal address, and then AstroTag overlays the other details. AstroTag will not touch the original screenshots, as all edits are performed on copies of the screenshots.
 
 ## how it works
 
