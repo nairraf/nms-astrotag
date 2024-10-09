@@ -96,5 +96,7 @@ And here are a few examples of the final produced image:
 
 ![example 1](Images/20241005172553_1.jpg)
 
+"Gaseous Sentience\\nHuristlan System" was entered as a note. The result is a line break so the note spans two lines:
+
 ![example 2 - notes line break example](Images/20241008231007_1.jpg)
 
