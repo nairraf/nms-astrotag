@@ -1,6 +1,7 @@
 $screenShotPath = "D:\Program Files\Steam\userdata\86443413\760\remote\275850\screenshots"
 $playerName = "Quol"
 $addPlayerName = $True
+$annotationFont = "Cascadia-Mono-Regular" # magick -list font
 
 # do not edit anything below this line
 $screenShotAnnotatePath = "$screenShotPath\Annotated"
@@ -413,7 +414,7 @@ while ($true) {
         ## do the annotation
 
         # generating the galaxy anotation image
-        magick.exe -size 500x80 xc:none -font Cascadia-Mono-Regular -pointsize 30 `
+        magick.exe -size 500x80 xc:none -font $annotationFont -pointsize 30 `
         -stroke black -strokewidth 8 -gravity East -annotate +10+5 $galaxyShortName -blur 0x8 `
         -fill white   -stroke none   -gravity East -annotate +10+5 $galaxyShortName `
         "$screenShotAnnotatePath\annotate-galaxy.png"
@@ -425,7 +426,7 @@ while ($true) {
         if ($addPlayerName) {
             if (-not(Test-Path -Path ("$screenShotAnnotatePath\annotate-player.png") -PathType Leaf)) {
                 # generate the player name image
-                magick.exe -size 500x80 xc:none -font Cascadia-Mono-Regular -pointsize 30 `
+                magick.exe -size 500x80 xc:none -font $annotationFont -pointsize 30 `
                 -stroke black -strokewidth 8 -gravity West -annotate +10+5 $playerName -blur 0x8 `
                 -fill white   -stroke none   -gravity West -annotate +10+5 $playerName `
                 "$screenShotAnnotatePath\annotate-player.png"
@@ -438,13 +439,13 @@ while ($true) {
 
         if ($notes.Length -gt 0) {
             # generate the note image
-            magick.exe -size 1500x80 xc:none -font Cascadia-Mono-Regular -pointsize 25 `
+            magick.exe -size 1500x90 xc:none -font $annotationFont -pointsize 25 `
             -stroke black -strokewidth 8 -gravity East -annotate +10+5 $notes -blur 0x8 `
             -fill gray   -stroke none   -gravity East -annotate +10+5 $notes `
             "$screenShotAnnotatePath\annotate-notes.png"
     
             # overlay the note image
-            magick.exe composite -gravity SouthEast -geometry +0+15 `
+            magick.exe composite -gravity SouthEast -geometry +0+0 `
             "$screenShotAnnotatePath\annotate-notes.png" "$screenShotAnnotatePath\$($pic.Name)" "$screenShotAnnotatePath\$($pic.Name)"
         }
 

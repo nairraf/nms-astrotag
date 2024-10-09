@@ -45,6 +45,9 @@ set to $true to add your playername to the top right of your screenshots
 ### $playerName
 set to your desired player name. this is the name that will be added to the top right corner of your screenshots
 
+### $annotationFont
+the name of the annotation font to use. To view all fonts detected by Image Magick, excute "magick -list font" on a command line. A mono font is recommended, although you can use any font in that list.
+
 ## usage
 
 with the file downloaded and variables updated, all that is needed is to execute the script from a powershell console. Open a powershell console, navigate to the correct directory (hint: open the windows file explorer and browse to the folder where you placed the script and then type "powershell" in the navigation bar at the top. this will open powershell in the same directory that file explorer is displaying).
@@ -81,7 +84,7 @@ Entering 'p' will list all 263 galaxies. You can use the console's scroll bars t
 ![Galaxy List](Images/03.png)
 ![Galaxy List continued](Images/04.png)
 
-Enter the desired galaxy ID (such as 10 for Eissentam), and a note (if desired):
+Enter the desired galaxy ID (such as 10 for Eissentam), and a note (if desired). you can specify a line break for a note by placing a '\n' in the text where you want the line break. The notes area is big enough for two lines (a single line break (\n)):
 
 ![Enter galaxy Id and notes](Images/05.png)
 
@@ -89,6 +92,9 @@ Before AstroTag overlays the information, you need to validate the input. Enteri
 
 ![confirm annotations](Images/06.png)
 
-And here is the result that is saved into the annotations directory:
+And here are a few examples of the final produced image:
 
-![result](Images/20241005172553_1.jpg)
+![example 1](Images/20241005172553_1.jpg)
+
+![example 2 - notes line break example](Images/20241008231007_1.jpg)
+
