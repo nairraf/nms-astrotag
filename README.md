@@ -69,7 +69,7 @@ this will cause astrotag to run in the background and locate un-annotated screen
 It is recommended that you run this script within the new windows terminal which can be downloaded from the microsoft store. This way you can simply click on the screenshot links that AstroTag displays in the console for the image that is currently being processed. Clicking on the link in the windows terminal will open that particular screenshot up in your default image viewer so you can see which screenshot is about to be tagged. Then you can confirm the details and AstroTag will overlay the details and move to the next screenshot.
 
 # Images
-AstroTag will start the main loop upon startup and look for any new screenshots:
+AstroTag will start the main loop upon startup, and asks you to confirm the galaxy name before the main loop starts, which simply runs in the background looking for any new screenshots:
 
 ![Main Screen](Images/01.png)
 

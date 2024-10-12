@@ -360,15 +360,21 @@ function WriteHeader {
     Write-Host "Welcome to AstroTag - the NMS Screenshot Annotator"
     Write-Host "--------------------------------------------------"
     Write-Host ""
+}
+
+function WriteLoopDetails {
+    Write-Host ""
+    Write-Host "Selected Galaxy: $($script:galaxy)"
+    Write-Host ""
     Write-Host "Press Ctrl-C to quit"
     Write-Host -NoNewline "Looking for new Screenshots"
 }
 
+$notes = ""
 ""
 WriteHeader
-$galaxy = ""
-$galaxyShortName = ""
-$notes = ""
+$galaxy, $galaxyShortName = GetUserGalaxyInput
+WriteLoopDetails
 while ($true) {
     $screenShotsToAnnotate = GetNewScreenShots
     if (0 -eq $screenShotsToAnnotate.count) {
@@ -457,4 +463,5 @@ while ($true) {
 
     Clear-Host
     WriteHeader
+    WriteLoopDetails
 }
