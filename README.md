@@ -71,35 +71,48 @@ this will cause astrotag to run in the background and locate un-annotated screen
 
 It is recommended that you run this script within the new windows terminal which can be downloaded from the microsoft store. This way you can simply click on the screenshot links that AstroTag displays in the console for the image that is currently being processed. Clicking on the link in the windows terminal will open that particular screenshot up in your default image viewer so you can see which screenshot is about to be tagged. Then you can confirm the details and AstroTag will overlay the details and move to the next screenshot.
 
-# Images
+# Walk-Through
 AstroTag will start the main loop upon startup, and asks you to confirm the galaxy name before the main loop starts, which simply runs in the background looking for any new screenshots:
 
 ![Main Screen](Images/01.png)
 
-When a new screenshot is found, AstroTag displays the path tot he file, and it is clickable if you use the new Windows Terminal which will open up the screenshot in your defatul image viewer. This way you can see which screenshot will be annotated.
+When new screenshots are found, AstroTag displays the path to the original screenshot file. You can ctrl-click on these, as long as you are using the new Windows Terminal, which will then open up the screenshot in your defatul image viewer. This way you can see which screenshot will be annotated.
 
-You need to confirm the galaxy ID to identify the galaxy. If multiple screenshots will be processed, then the galaxy ID will be reused (although you can change it if required):
+You need to confirm the previous entered annotation details before AstroTag will annotate the screenshot. Entering "y" will immediately annotate the screenshot with previous annotation data. Entering "n" will allow you to change any of the annotation details.
 
 ![Screenshot Identified Screen](Images/02.png)
 
-Entering 'p' will list all 263 galaxies. You can use the console's scroll bars to browse through the list and identify the ID for your desired galaxy. The galaxies are color coded based on galaxy type (normal, lush, harsh, empty):
+You can modify all information (Galaxy and lines 1 and 2 of the notes section) by entering "a", or just the galaxy details by entering in 'g', or just lines 1 or 2 of the notes section by entering "1" or "2":
+![Screenshot Identified Screen b](Images/02b.png)
+
+At anytime when prompted to enter galaxy ID's, Entering 'p' will list all 263 galaxies. You can use the console's scroll bars to browse through the list and identify the ID for your desired galaxy. The galaxies are color coded based on galaxy type (normal, lush, harsh, empty):
 
 ![Galaxy List](Images/03.png)
 ![Galaxy List continued](Images/04.png)
 
-Enter the desired galaxy ID (such as 10 for Eissentam), and a note (if desired). you can specify a line break for a note by placing a '\\n' in the text where you want the line break. The notes area is big enough for two lines (a single line break (\\n)):
+Enter the desired galaxy ID (such as 1 for Euclid, 10 for Eissentam, or 21 in this case for Loychazinq). Confirm any notes that you want in the notes section. Not entering anything for the second note line will result in just a single note line centered with the glyphs:
 
 ![Enter galaxy Id and notes](Images/05.png)
 
-Before AstroTag overlays the information, you need to validate the input. Entering 'n' here will allow  you to change the galaxy ID and note:
+Before AstroTag overlays the information, you need to validate the input. Entering 'n' here will allow  you to change the galaxy ID and notes (see above image). Entering "y" here will annotate the screenshot with the provided details, and save the new annotated screenshot into the seperate directory, leaving the original intact:
 
 ![confirm annotations](Images/06.png)
+
+After all the new screenshots from the previous run have been annotated, clickable links to the newly annotated screenshots are available (assuming you are using the new Windows Terminal), while AstroTag once again waits for new screenshots, and the loop repeats as soon as a new screenshot is detected:
+
+![completed run showing completed annotations from last run](Images/07.png)
 
 And here are a few examples of the final produced image:
 
 ![example 1](Images/20241005172553_1.jpg)
 
-"Gaseous Sentience\\nHuristlan System" was entered as a note. The result is a line break so the note spans two lines:
+"Gaseous Sentience" was entered for "Notes Line 1", and "Huristlan System" was entered for "Notes line 2". The result is a line break so the note spans two lines:
 
 ![example 2 - notes line break example](Images/20241008231007_1.jpg)
 
+
+![example 3 - pretty pink bubble paradise](Images/20241012161515_1.jpg)
+
+Here is the one that was used as a reference for all the walkthough images:
+
+![example 3 - blue paradise](Images/20241012234415_1.jpg)
