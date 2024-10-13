@@ -48,6 +48,9 @@ set to your desired player name. this is the name that will be added to the top 
 ### $annotationFont
 the name of the annotation font to use. To view all fonts detected by Image Magick, excute "magick -list font" on a command line. A mono font is recommended, although you can use any font in that list.
 
+### columns
+the number of columns you want when pressing 'p' to print the galaxy names. By default this script uses 3 columns.
+
 ## usage
 
 with the file downloaded and variables updated, all that is needed is to execute the script from a powershell console. Open a powershell console, navigate to the correct directory (hint: open the windows file explorer and browse to the folder where you placed the script and then type "powershell" in the navigation bar at the top. this will open powershell in the same directory that file explorer is displaying).
@@ -79,7 +82,7 @@ You need to confirm the galaxy ID to identify the galaxy. If multiple screenshot
 
 ![Screenshot Identified Screen](Images/02.png)
 
-Entering 'p' will list all 263 galaxies. You can use the console's scroll bars to browse through the list and identify the ID for your desired galaxy:
+Entering 'p' will list all 263 galaxies. You can use the console's scroll bars to browse through the list and identify the ID for your desired galaxy. The galaxies are color coded based on galaxy type (normal, lush, harsh, empty):
 
 ![Galaxy List](Images/03.png)
 ![Galaxy List continued](Images/04.png)

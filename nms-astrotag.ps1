@@ -2,6 +2,7 @@ $screenShotPath = "D:\Program Files\Steam\userdata\86443413\760\remote\275850\sc
 $playerName = "Quol"
 $addPlayerName = $True
 $annotationFont = "Cascadia-Mono-Regular" # magick -list font
+$columns = 3 # number of columns when printing galaxy list
 
 # do not edit anything below this line
 $screenShotAnnotatePath = "$screenShotPath\Annotated"
@@ -276,25 +277,68 @@ $galaxies = @(
     "262. Uewamoisow (-1)"
 )
 
+$lushGalaxyIDs = @(10,19,30,39,50,59,70,79,90,99,110,119,130,139,150,159,170,179,190,199,210,219,230,239,250)
+$harshGalaxyIDs = @(3,15,23,35,43,55,63,75,83,95,103,115,123,135,143,155,163,175,183,195,203,215,223,235,243,255)
+$emptyGalaxyIDs = @(7,12,27,32,47,52,67,72,87,92,107,112,127,132147,152167,172,187,192,207,212,227,232,247,252)
+
+function colorGalaxyName {
+    param([string]$GalaxyName, [int]$GalaxyID)
+
+    if ($lushGalaxyIDs.Contains($GalaxyID)) {
+        $GalaxyName = "$($PSStyle.Background.Green)$($PSStyle.Foreground.White)$GalaxyName$($PSStyle.Reset)"
+    }
+
+    if ($harshGalaxyIDs.Contains($GalaxyID)) {
+        $GalaxyName = "$($PSStyle.Background.Red)$($PSStyle.Foreground.White)$GalaxyName$($PSStyle.Reset)"
+    }
+
+    if ($emptyGalaxyIDs.Contains($GalaxyID)) {
+        $GalaxyName = "$($PSStyle.Background.Blue)$($PSStyle.Foreground.White)$GalaxyName$($PSStyle.Reset)"
+    }
+
+    return $GalaxyName
+}
+
+function printLegend {
+    Write-Host ""
+    Write-Host "Normal Galaxy"
+    Write-Host "$($PSStyle.Background.Green)$($PSStyle.Foreground.White)Lush Galaxy$($PSStyle.Reset)"
+    Write-Host "$($PSStyle.Background.Red)$($PSStyle.Foreground.White)Harsh Galaxy$($PSStyle.Reset)"
+    Write-Host "$($PSStyle.Background.Blue)$($PSStyle.Foreground.White)Empty Galaxy$($PSStyle.Reset)"
+    Write-Host ""
+}
+
+function printSelectedGalaxy {
+    return colorGalaxyName -GalaxyName $script:galaxy -GalaxyID $script:galaxyID
+}
+
 function PrintGalaxies {
     $gs = ""
-    $columns = 0
+    $columnCount = 1
+    $curIndex = 0
     foreach ($g in $galaxies) {
         $line = $g
-        while ($line.Length -lt 30) {
+        $origLength = $g.Length
+
+        $line = colorGalaxyName -GalaxyName $line -GalaxyID $curIndex
+
+        for ($i=0;$i -lt 30-$origLength;$i++) {
             $line += " "
         }
 
-        if ($columns -lt 3) {
+        $curIndex += 1
+        
+        if ($columnCount -lt $script:columns) {
             $gs += "$line"
-            $columns += 1
+            $columnCount += 1
         } else {
-            $gs += "$g`n"
-            $columns = 0
+            $gs += "$line`n"
+            $columnCount = 1
         }
     }
     Write-Host $gs
     Write-Host ""
+    printLegend
 }
 function GetNewScreenShots {
     $completed = Get-ChildItem -Path $screenShotAnnotatePath -Filter '*.jpg'
@@ -319,10 +363,10 @@ function GetUserGalaxyInput {
             exit
         }
         try {
-            $selection = [int]$uinput
-            $galaxyName = $galaxies[$selection]
-            $galaxyShortName = $galaxyName.Split('.')[1].Trim() + " Galaxy"
-            return @($galaxyName, $galaxyShortName)
+            $script:galaxyID = [int]$uinput
+            $script:galaxy = $galaxies[$uinput]
+            $script:galaxyShortName = $script:galaxy.Split('.')[1].Trim() + " Galaxy"
+            return
         } catch {
             Write-Host "Please enter a valid galaxy number"
             continue
@@ -350,7 +394,7 @@ function UsePrevious {
         }
     }
 
-    $script:galaxy, $script:galaxyShortName = GetUserGalaxyInput
+    GetUserGalaxyInput
     $script:notes = GetUserNotesInput
     return
 }
@@ -364,7 +408,7 @@ function WriteHeader {
 
 function WriteLoopDetails {
     Write-Host ""
-    Write-Host "Selected Galaxy: $($script:galaxy)"
+    Write-Host "Selected Galaxy: $(printSelectedGalaxy)"
     Write-Host ""
     Write-Host "Press Ctrl-C to quit"
     Write-Host -NoNewline "Looking for new Screenshots"
@@ -373,7 +417,10 @@ function WriteLoopDetails {
 $notes = ""
 ""
 WriteHeader
-$galaxy, $galaxyShortName = GetUserGalaxyInput
+$galaxy = "" 
+$galaxyShortName = "" 
+$galaxyID = ""
+GetUserGalaxyInput
 WriteLoopDetails
 while ($true) {
     $screenShotsToAnnotate = GetNewScreenShots
@@ -398,7 +445,7 @@ while ($true) {
         }
 
         if ($galaxyShortName.Length -eq 0) {
-            $galaxy, $galaxyShortName = GetUserGalaxyInput
+            GetUserGalaxyInput
         } 
         
         if ($notes.Length -eq 0) {
