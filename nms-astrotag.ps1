@@ -375,9 +375,20 @@ function GetUserGalaxyInput {
 }
 
 function GetUserNotesInput {
-    while ($true) {
-        $note = (Read-Host "Please Enter any notes")
-        return $note
+    $script:note1 = (Read-Host "Please Enter any notes (Line 1)")
+    if ($note2.Length -gt 0) {
+        $script:notes = "$note1\n$note2"
+    } else {
+        $script:notes = "$note1"
+    }
+}
+
+function GetUserNotesLine2 {
+    $script:note2 = (Read-Host "Please Enter any notes (Line 2)")
+    if ($note2.Length -gt 0) {
+        $script:notes = "$note1\n$note2"
+    } else {
+        $script:notes = "$note1"
     }
 }
 
@@ -386,17 +397,37 @@ function UsePrevious {
    
     if (-not $Skip) {
         Write-Host ""
-        Write-Host "Previous Galaxy: $galaxy"
-        Write-Host "Previous Note: $notes"
+        Write-Host "Previous Galaxy: $script:galaxy"
+        Write-Host "Previous Note (Line 1): $script:note1"
+        Write-Host "Previous Note (Line 2): $script:note2"
         $confirm = (Read-Host "Use Previous details? [y/n]").ToLower()
         if ($confirm -eq 'y') {
             return
         }
     }
 
-    GetUserGalaxyInput
-    $script:notes = GetUserNotesInput
-    return
+    $confirm = (Read-Host "Modify [A]ll, [G]alaxy, Note[1], Note[2]").ToLower()
+    switch ($confirm) {
+        'a' {   
+                GetUserGalaxyInput
+                GetUserNotesInput
+                GetUserNotesLine2
+                break
+            }
+        'g' {
+                GetUserGalaxyInput
+                break
+            }
+        '1' {
+                GetUserNotesInput
+                break
+            }
+        
+        '2' {
+                GetUserNotesLine2
+                break
+            }
+    }
 }
 
 function WriteHeader {
@@ -409,17 +440,30 @@ function WriteHeader {
 function WriteLoopDetails {
     Write-Host ""
     Write-Host "Selected Galaxy: $(printSelectedGalaxy)"
+    Write-Host "Note Line 1: $note1"
+    Write-Host "Note Line 2: $note2"
+    Write-Host ""
+    if ($previousAnnotations.Count -gt 0) {
+        Write-Host "Completed Annotated Images last run: "
+        foreach ($pic in $previousAnnotations) {
+            Write-Host "    $pic"
+        }
+    }
     Write-Host ""
     Write-Host "Press Ctrl-C to quit"
     Write-Host -NoNewline "Looking for new Screenshots"
 }
 
-$notes = ""
+
 ""
 WriteHeader
 $galaxy = "" 
 $galaxyShortName = "" 
 $galaxyID = ""
+$note1 = ""
+$note2 = ""
+$notes = ""
+$previousAnnotations = @()
 GetUserGalaxyInput
 WriteLoopDetails
 while ($true) {
@@ -433,6 +477,7 @@ while ($true) {
     ""
     "-- Detected $($screenShotsToAnnotate.Count) new screenshots: "
     $curpic=1
+    $previousAnnotations = @()
     foreach ($pic in $screenShotsToAnnotate) {
         $validated = $false
         ""
@@ -449,14 +494,16 @@ while ($true) {
         } 
         
         if ($notes.Length -eq 0) {
-            $notes = GetUserNotesInput
+            GetUserNotesInput
+            GetUserNotesLine2
         } 
 
         while($true) {
             ""
             "Annotating the screenshot with the following details:"
             "  Galaxy: $galaxyShortName"
-            "  Note: $notes"
+            "  Note Line1: $note1"
+            "  Note Line2: $note2"
             $proceed = Read-Host "Proceed? [y/n]".ToLower()
             if ($proceed -eq 'y') {
                 break
@@ -506,6 +553,7 @@ while ($true) {
         magick.exe "$screenShotAnnotatePath\$($pic.Name)" -border 5  "$screenShotAnnotatePath\$($pic.Name)"
 
         $curpic+=1
+        $previousAnnotations += "file://localhost/$screenShotAnnotatePath\$($pic.Name)".Replace('\','/').Replace(" ","%20")
     }
 
     Clear-Host
