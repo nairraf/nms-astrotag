@@ -113,6 +113,6 @@ And here are a few examples of the final produced image:
 
 ![example 3 - pretty pink bubble paradise](Images/20241012161515_1.jpg)
 
-Here is the one that was used as a reference for all the walkthough images:
+Here is the one that was used as a reference for all the walkthrough images:
 
 ![example 3 - blue paradise](Images/20241012234415_1.jpg)
