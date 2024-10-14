@@ -82,7 +82,7 @@ You need to confirm the previous entered annotation details before AstroTag will
 
 ![Screenshot Identified Screen](Images/02.png)
 
-You can modify all information (Galaxy and lines 1 and 2 of the notes section) by entering "a", or just the galaxy details by entering in 'g', or just lines 1 or 2 of the notes section by entering "1" or "2":
+You can modify all information (Galaxy and lines 1 and 2 of the notes section) by entering "a", or just the galaxy details by entering in 'g', or just lines 1 or 2 of the notes section by entering "1" or "2". Enter "d" when you are done editing to return to the annotation confirmation screen:
 ![Screenshot Identified Screen b](Images/02b.png)
 
 At anytime when prompted to enter galaxy ID's, Entering 'p' will list all 263 galaxies. You can use the console's scroll bars to browse through the list and identify the ID for your desired galaxy. The galaxies are color coded based on galaxy type (normal, lush, harsh, empty):

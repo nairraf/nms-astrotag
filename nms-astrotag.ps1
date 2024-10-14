@@ -405,28 +405,37 @@ function UsePrevious {
             return
         }
     }
-
-    $confirm = (Read-Host "Modify [A]ll, [G]alaxy, Note[1], Note[2]").ToLower()
-    switch ($confirm) {
-        'a' {   
-                GetUserGalaxyInput
-                GetUserNotesInput
-                GetUserNotesLine2
-                break
-            }
-        'g' {
-                GetUserGalaxyInput
-                break
-            }
-        '1' {
-                GetUserNotesInput
-                break
-            }
-        
-        '2' {
-                GetUserNotesLine2
-                break
-            }
+    :editloop while ($true) {
+        Write-Host ""
+        Write-Host "Previous Galaxy: $script:galaxy"
+        Write-Host "Previous Note (Line 1): $script:note1"
+        Write-Host "Previous Note (Line 2): $script:note2"
+        Write-Host ""
+        $confirm = (Read-Host "Modify [A]ll, [G]alaxy, Note[1], Note[2], [D]one").ToLower()
+        switch ($confirm) {
+            'a' {   
+                    GetUserGalaxyInput
+                    GetUserNotesInput
+                    GetUserNotesLine2
+                    break
+                }
+            'g' {
+                    GetUserGalaxyInput
+                    break
+                }
+            '1' {
+                    GetUserNotesInput
+                    break
+                }
+            
+            '2' {
+                    GetUserNotesLine2
+                    break
+                }
+            'd' {
+                    break editloop
+                }
+        }
     }
 }
 
