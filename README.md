@@ -39,6 +39,9 @@ Once downloaded, modify the following variables located at the top of the file (
 ### $screenShotPath
 this should be set to the patch where steam places your screenshots when you press F12 in-game. if unsure where they are placed, in Steam click on one of your screenshots, and the Steam screenshot manager should open. Click on the little folder icon next to the game dropdown, and that should open the windows file explorer. Update the $screenShotPath varaiable with this location.
 
+### $screenShotAnnotatedFolderName
+This is the name of the folder that is created as a child of the $screenShotPath folder. This folder will contain the annotated copies of the screenshots that AstroTag creates.
+
 ### $addPlayerName
 set to $true to add your playername to the top right of your screenshots
 

@@ -1,11 +1,13 @@
 $screenShotPath = "D:\Program Files\Steam\userdata\86443413\760\remote\275850\screenshots"
+$screenShotAnnotatedFolderName = "Annotated"
 $playerName = "Quol"
 $addPlayerName = $True
-$annotationFont = "Cascadia-Mono-Regular" # magick -list font
+$annotationFont = "Cascadia-Mono-Regular" # list all available font names using imagemagick command: 'magick -list font'
 $columns = 3 # number of columns when printing galaxy list
 
-# do not edit anything below this line
-$screenShotAnnotatePath = "$screenShotPath\Annotated"
+#### do not edit anything below this line
+$screenShotAnnotatePath = "$screenShotPath\$screenShotAnnotatedFolderName"
+$screenShotAnnotatePathURI = $screenShotAnnotatePath.Replace("\", "/").Replace(" ","%20")
 
 if (-not(Test-Path -Path $screenShotAnnotatePath -PathType Container)) {
     New-Item -ItemType Directory -Path $screenShotAnnotatePath | Out-Null
@@ -443,6 +445,9 @@ function WriteHeader {
     Write-Host "--------------------------------------------------"
     Write-Host "Welcome to AstroTag - the NMS Screenshot Annotator"
     Write-Host "--------------------------------------------------"
+    Write-Host ""
+    Write-Host "Screenshot Annotation Folder:"
+    "    file://localhost/$screenShotAnnotatePathURI"
     Write-Host ""
 }
 
